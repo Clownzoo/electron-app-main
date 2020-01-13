@@ -9,6 +9,8 @@
   "devDependencies": {
     "colors-cli": "^1.0.26",
     "cross-env": "^6.0.3",
+    "electron-packager": "^14.1.1",
+    "electron-prebuilt": "^1.4.13",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   },
