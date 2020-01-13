@@ -1,0 +1,5 @@
+.DS_Store
+.vscode/
+yarn.lock
+dist/*
+node_modules/
