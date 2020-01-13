@@ -1,6 +1,0 @@
-.DS_Store
-.vscode/
-main/node_modules/
-main/yarn.lock
-renderer/node_modules/
-renderer/yarn.lock
