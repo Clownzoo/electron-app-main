@@ -1,8 +1,27 @@
-const { BrowserWindow } = require('electron');
+const EventTypes = require('../constants/event-type.js');
+const { BrowserWindow, ipcMain } = require('electron');
+const DEFAULT_OPTION = {
+  title: '',
+  width: 800,
+  height: 600,
+  webPreferences: {
+    nodeIntegration: true
+  }
+};
 class WindowManager {
 	constructor() {
-		this.winMap = {};
-	}
+    this.winMap = {};
+    this.icpRegister();
+  }
+  
+  icpRegister() {
+    ipcMain.on(EventTypes.OPEN_WINDOW, async (event, data) => {
+      this.open(data);
+    });
+    ipcMain.on(EventTypes.CLOSE_WINDOW, async (event, data) => {
+      this.close(data);
+    })
+  }
 
   fromId(id) {
     return BrowserWindow.fromId(id);
@@ -22,11 +41,15 @@ class WindowManager {
       // this.show(name);
       return;
     }
-    const win = new BrowserWindow(options);
+    const win = new BrowserWindow(Object.assign({...DEFAULT_OPTION, ...options}));
     const winId = win.id;
     this.winMap[name] = winId;
     win.loadURL(url);
-	}
+  }
+  
+  close(name) {
+    console.log('关闭')
+  }
 
 	openTool(name) {
 		const win = this.getWindow(name);
